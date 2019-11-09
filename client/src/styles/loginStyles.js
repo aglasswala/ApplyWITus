@@ -11,7 +11,8 @@ const loginStyles = theme => ({
 		padding: "40px 0 33px 0",
 		borderRadius: "5px",
 		border: "1px solid #eeeeee",
-		margin: "20vh auto"
+		margin: "20vh auto",
+		boxShadow: "0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
 	},
 	signinContainer: {
 		maxWidth: "340px",
@@ -58,6 +59,7 @@ const loginStyles = theme => ({
 		padding: "40px",
 		marginTop: "-75px",
 		marginLeft: "-20px",
+		boxShadow: "0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
 		borderRadius: "6px"
 	}
 })
