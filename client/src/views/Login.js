@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react'
 
 import { Grid, Paper, withStyles, Typography, Button, TextField } from "@material-ui/core"
+import BackgroundSlider from 'react-background-slider'
 
 import loginStyles from "../styles/loginStyles"
+import image1 from "../styles/pictures/background1.jpg"
 
 class Login extends Component {
 
@@ -10,6 +12,9 @@ class Login extends Component {
 		const { classes } = this.props
 		return (
 			<Fragment>
+				<BackgroundSlider
+				  images={[image1]}
+				  duration={2} transition={2} />
 				<div className={classes.placeHolderTop}>
 					<div className={classes.placeHolderBottom}>
 						<div className={classes.signinBox}>
