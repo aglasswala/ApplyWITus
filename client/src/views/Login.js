@@ -16,7 +16,7 @@ class Login extends Component {
 							<div className={classes.signinContainer}>
 								<div className={classes.container}>
 									<div className={classes.overlay} style={{background: "primary"}}>
-										<Typography variant="h3" align="center">
+										<Typography variant="h3" align="center" style={{color: "white"}}>
 											Log In
 										</Typography>
 									</div>
