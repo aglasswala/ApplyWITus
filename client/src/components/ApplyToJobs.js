@@ -1,14 +1,32 @@
 import React, { Component } from "react"
 
-import { withStyles, Grid, Button } from "@material-ui/core"
+import { withStyles, Grid, Button, Dialog, DialogContent, DialogContentText, DialogTitle, DialogActions } from "@material-ui/core"
 
 import applyToJobsStyles from "../styles/applyToJobsStyles"
 import ApplyToJobsTable from "../components/ApplyToJobsTable"
 
 class ApplyToJobs extends Component {
 
+	state = { 
+		applyOpen: false
+	}
+
+	handleApplyClose = () => {
+		this.setState({
+			applyOpen: false
+		})
+	}
+
+	handleApplyOpen = () => {
+		this.setState({
+			applyOpen: true
+		})
+	}
+
+
 	render() {
 		const { classes } = this.props
+		const { applyOpen } = this.state
 		return (
 			<div>
 				<Grid className={classes.gridContainer}>
@@ -20,7 +38,7 @@ class ApplyToJobs extends Component {
 						  alignItems="center"
 						>
 							<Grid item>
-								<Button variant="contained" color="primary"> Apply </Button>
+								<Button variant="contained" color="primary" onClick={this.handleApplyOpen}> Apply </Button>
 							</Grid>
 							<Grid item>
 								<Button color="primary"> Logout </Button>
@@ -55,6 +73,28 @@ class ApplyToJobs extends Component {
                         </div>
                     </Grid>
 				</Grid>
+				<Dialog
+			        open={applyOpen}
+			        onClose={this.handleApplyClose}
+			        aria-labelledby="alert-dialog-title"
+			        aria-describedby="alert-dialog-description"
+			    >
+			        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+			        <DialogContent>
+			          <DialogContentText id="alert-dialog-description">
+			            Let Google help apps determine location. This means sending anonymous location data to
+			            Google, even when no apps are running.
+			          </DialogContentText>
+			        </DialogContent>
+			        <DialogActions>
+			          <Button onClick={this.handleApplyClose} color="primary">
+			            Disagree
+			          </Button>
+			          <Button onClick={this.handleApplyClose} color="primary" autoFocus>
+			            Agree
+			          </Button>
+			        </DialogActions>
+			    </Dialog>
 			</div>
 		)
 	}
