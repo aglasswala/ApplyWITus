@@ -1,12 +1,23 @@
-const express = require('express')
-const app = express()
+const express = require("express")
+const bodyParser = require("body-parser")
+const cors = require("cors")
 
-app.get('/', (req, res) => {
-	res.status(200).send({
-		"yes": "yes"
-	})
-})
+const router = require("./routes")
 
-app.listen(3001, () => {
-	console.log(`let's get it motherfucker, we live on ${3001}`)
-})
+function startServer(server) {
+  server.listen(3001, () => {
+    console.log(`let's get it motherfucker, we live on ${3001}`);
+  });
+}
+
+async function init() {
+  const app = express();
+
+  app.use(bodyParser.json());
+  app.use(cors());
+
+  router(app);
+  startServer(app);
+}
+
+init();
