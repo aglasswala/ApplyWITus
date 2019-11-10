@@ -1,9 +1,12 @@
 const handler = require('./controllers/main')
-const selhandler = require('./controllers/seleniumController')
+const multer = require('multer')
+const uploads = multer({ dest: 'uploads/' })
 module.exports = router => {
 	router.get('/', handler.homepage)
 
 	router.post('/register', handler.registerUser)
 	router.post('/login', handler.loginUser)
-	router.post('/applyJob', selhandler.startSelenium)
+
+	router.post('/postJobs', handler.postJobs)
+	router.post('/apply',uploads.single('file'), handler.apply)
 }

@@ -1,4 +1,5 @@
 const { loginUser, registerUser } = require("./users/users")
+const { apply } = require("./apply/apply")
 
 module.exports = {
 	homepage: (req, res) => {
@@ -7,5 +8,7 @@ module.exports = {
 		})
 	},
 	loginUser,
-	registerUser
+	registerUser,
+	// postJobs,
+	apply
 }
