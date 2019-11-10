@@ -5,8 +5,38 @@ import BackgroundSlider from 'react-background-slider'
 
 import loginStyles from "../styles/loginStyles"
 import image1 from "../styles/pictures/background1.jpg"
+import { loginUser } from '../api/api'
 
 class Login extends Component {
+
+	state = {
+		email: "",
+		password: ""
+	}
+
+	onChange = (e) => this.setState({[e.target.name]: e.target.value})
+
+	submit = async () => {
+		const { email, password } = this.state
+
+		fetch("http://localhost:3001/login", {
+			method: 'post',
+		  	headers: {
+		    	'Content-Type': 'application/json'
+		  	},
+		  	body: JSON.stringify({
+		    	email,
+		      	password
+		  	})
+		})
+			.then(response => response.json())
+			.then(result => {
+				if (result.result === "success") {
+					this.props.history.push("/dashboard")
+				}
+			})
+			.catch(err => console.log(err))
+	}
 
 	render() {
 		const { classes } = this.props
@@ -29,7 +59,9 @@ class Login extends Component {
 										<span className={classes.wrapper}>
 											<TextField 
 													label="Email"
+													name="email"
 													className={classes.textField}
+													onChange={this.onChange}
 													style={{marginTop: "30px"}}
 												/> 
 										</span>
@@ -37,6 +69,8 @@ class Login extends Component {
 											<TextField 
 												label="Password"
 												type="password"
+												name="password"
+												onChange={this.onChange}
 												className={classes.textField}
 												margin="normal"
 											/> 
@@ -44,18 +78,17 @@ class Login extends Component {
 									</form>
 									<span className={classes.wrapper}>
 										<Button
-												variant="contained"
-												color="primary"
-												className={classes.button}
-											>
-												Submit
+											variant="contained"
+											color="primary"
+											className={classes.button}
+											onClick={this.submit}
+										>
+											Submit
 										</Button>
 									</span>
 									<div className={classes.actions}>
-										<Button> Forgot Password?</Button>
-										<Button
-										> Sign Up 
-										</Button>
+										<Button> Forgot Password? </Button>
+										<Button> Sign Up </Button>
 									</div>
 								</div>
 							</div>
