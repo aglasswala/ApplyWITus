@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 
-import { withStyles, Grid, Button, Dialog, DialogContent, DialogContentText, DialogTitle, DialogActions } from "@material-ui/core"
+import { withStyles, Grid, Button, Dialog, DialogContent, DialogContentText, DialogTitle, DialogActions, TextField } from "@material-ui/core"
 
 import applyToJobsStyles from "../styles/applyToJobsStyles"
 import ApplyToJobsTable from "../components/ApplyToJobsTable"
 
 class ApplyToJobs extends Component {
 
-	state = { 
+	state = {
 		applyOpen: false
 	}
 
@@ -32,10 +32,10 @@ class ApplyToJobs extends Component {
 				<Grid className={classes.gridContainer}>
 					<Grid item className={classes.gridItem}>
 						<Grid
-						  container
-						  direction="row"
-						  justify="space-between"
-						  alignItems="center"
+							container
+							direction="row"
+							justify="space-between"
+							alignItems="center"
 						>
 							<Grid item>
 								<Button variant="contained" color="primary" onClick={this.handleApplyOpen}> Apply </Button>
@@ -43,58 +43,100 @@ class ApplyToJobs extends Component {
 							<Grid item>
 								<Button color="primary"> Logout </Button>
 							</Grid>
-						</Grid>	
+						</Grid>
 					</Grid>
 					<Grid item className={classes.gridItem} xs={12} sm={12} md={12}>
-                        <div className={classes.card}>
-                            <div className={classes.cardHeader}>
-                                <Grid
-                                  container
-                                  direction="row"
-                                  justify="space-between"
-                                  alignItems="center"
-                                >
-                                    <Grid item>
-                                        <h4 className={classes.cardTitleWhite}>Jobs you've applied to in the past</h4>
-                                        <p className={classes.cardCategoryWhite}>
-                                          Do somethignn
+						<div className={classes.card}>
+							<div className={classes.cardHeader}>
+								<Grid
+									container
+									direction="row"
+									justify="space-between"
+									alignItems="center"
+								>
+									<Grid item>
+										<h4 className={classes.cardTitleWhite}>Jobs you've applied to in the past</h4>
+										<p className={classes.cardCategoryWhite}>
+											Do somethignn
                                         </p>
-                                    </Grid>
-                                </Grid>
-                            </div>
-                            <div className={classes.cardBody}>
-                                <ApplyToJobsTable 
-                                    tableHead={["Event", "Stadium", "Time", "Date"]}
-                                    tableData={[
-                                    		["this", "is", "something", "cool"]
-                                    	]}
-                                />
-                            </div>
-                        </div>
-                    </Grid>
+									</Grid>
+								</Grid>
+							</div>
+							<div className={classes.cardBody}>
+								<ApplyToJobsTable
+									tableHead={["Event", "Stadium", "Time", "Date"]}
+									tableData={[
+										["this", "is", "something", "cool"]
+									]}
+								/>
+							</div>
+						</div>
+					</Grid>
 				</Grid>
 				<Dialog
-			        open={applyOpen}
-			        onClose={this.handleApplyClose}
-			        aria-labelledby="alert-dialog-title"
-			        aria-describedby="alert-dialog-description"
-			    >
-			        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-			        <DialogContent>
-			          <DialogContentText id="alert-dialog-description">
-			            Let Google help apps determine location. This means sending anonymous location data to
-			            Google, even when no apps are running.
-			          </DialogContentText>
-			        </DialogContent>
-			        <DialogActions>
-			          <Button onClick={this.handleApplyClose} color="primary">
-			            Disagree
+					classes={{ paper: classes.dialogPaper }}
+					open={applyOpen}
+					aria-labelledby="alert-dialog-title"
+					aria-describedby="alert-dialog-description"
+				>
+					<DialogTitle id="alert-dialog-title">{"Fill out some information to start applying"}</DialogTitle>
+					<DialogContent>
+						<Grid container spacing={.5}>
+							<Grid container item xs={12} spacing={2}>
+								<Grid item xs={6}>
+									<TextField autoFocus margin="dense" id="first-name" label="First Name" type="text" required />
+								</Grid>
+								<Grid item xs={6}>
+									<TextField margin="dense" id="last-name" label="Last Name" type="text" required/>
+								</Grid>
+							</Grid>
+							<Grid container item xs={12} spacing={2}>
+								<Grid item xs={6}>
+									<TextField margin="dense" id="phone-number" label="Phone" type="tel" required/>
+								</Grid>
+								<Grid item xs={6}>
+									<TextField autoFocus margin="dense" id="street" label="Street" type="text" required />
+								</Grid>
+							</Grid>
+							<Grid container item xs={12} spacing={3}>
+								<Grid item xs={4}>
+									<TextField autoFocus margin="dense" id="city" label="City" type="text" required/>
+								</Grid>
+								<Grid item xs={2}>
+									<TextField inputProps={{
+										maxLength: 2,
+									}} margin="dense" id="state" label="State" type="text" required />
+								</Grid>
+								<Grid item xs={4}>
+									<TextField margin="dense" id="zip-code" label="Zip Code" type="text" required/>
+								</Grid>
+							</Grid>
+						</Grid>
+						<Grid container item xs={12}>
+							<Grid item xs={12}>
+								<input
+									accept=".pdf,.doc,.docx"
+									className={classes.input}
+									style={{ display: 'none' }}
+									id="raised-button-file"
+									type="file"
+								/>
+								<label htmlFor="raised-button-file">
+									<Button variant="raised" component="span" className={classes.button}>Upload Resume</Button>
+								</label>
+								<p></p>
+							</Grid>
+						</Grid>
+					</DialogContent>
+					<DialogActions>
+						<Button onClick={this.handleApplyClose} color="primary">
+							Submit
 			          </Button>
-			          <Button onClick={this.handleApplyClose} color="primary" autoFocus>
-			            Agree
+						<Button onClick={this.handleApplyClose} color="primary" autoFocus>
+							Cancel
 			          </Button>
-			        </DialogActions>
-			    </Dialog>
+					</DialogActions>
+				</Dialog>
 			</div>
 		)
 	}
