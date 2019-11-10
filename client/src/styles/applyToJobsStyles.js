@@ -73,6 +73,9 @@ const applyToJobsStyles = theme => ({
     },
     buttons: {
         display: "inline-block"
+    },
+    wrapper: {  
+        padding: 20
     }
 })
 

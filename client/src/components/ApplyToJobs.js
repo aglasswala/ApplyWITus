@@ -8,7 +8,16 @@ import ApplyToJobsTable from "../components/ApplyToJobsTable"
 class ApplyToJobs extends Component {
 
 	state = {
-		applyOpen: false
+		applyOpen: false,
+		firstName: "",
+		lastName: "",
+		email: this.props.email,
+		phoneNumber: "",
+		street: "",
+		city: "",
+		state: "",
+		zip: "",
+		file: {}
 	}
 
 	handleApplyClose = () => {
@@ -23,6 +32,15 @@ class ApplyToJobs extends Component {
 		})
 	}
 
+	submit = () => {
+		this.setState({
+			applyOpen: false
+		})
+		
+		console.log(this.state) 
+	}
+
+	onChange = (e) => this.setState({[e.target.name]: e.target.value})
 
 	render() {
 		const { classes } = this.props
@@ -81,55 +99,130 @@ class ApplyToJobs extends Component {
 				>
 					<DialogTitle id="alert-dialog-title">{"Fill out some information to start applying"}</DialogTitle>
 					<DialogContent>
-						<Grid container spacing={.5}>
-							<Grid container item xs={12} spacing={2}>
-								<Grid item xs={6}>
-									<TextField autoFocus margin="dense" id="first-name" label="First Name" type="text" required />
-								</Grid>
-								<Grid item xs={6}>
-									<TextField margin="dense" id="last-name" label="Last Name" type="text" required/>
+						<Grid
+						  container
+						  direction="column"
+						  justify="center"
+						  alignItems="center"
+						>	
+							<Grid item>
+								<Grid
+								  container
+								  direction="row"
+								  justify="center"
+								  alignItems="center"
+								>	
+									<Grid item>
+										<div className={classes.wrapper}>
+											<TextField 
+											 	label="First Name" 
+											 	name="firstName"
+											 	type="text" 
+											 	onChange={this.onChange}
+											 	required 
+											/>
+										</div>
+									</Grid>
+									<Grid item>
+										<div className={classes.wrapper}>
+											<TextField 
+											 	label="Last Name" 
+											 	name="lastName"
+											 	onChange={this.onChange}
+											 	type="text" 
+											 	required 
+											/>	
+										</div>
+									</Grid>
 								</Grid>
 							</Grid>
-							<Grid container item xs={12} spacing={2}>
-								<Grid item xs={6}>
-									<TextField margin="dense" id="phone-number" label="Phone" type="tel" required/>
-								</Grid>
-								<Grid item xs={6}>
-									<TextField autoFocus margin="dense" id="street" label="Street" type="text" required />
+							<Grid item style={{width: "100%"}}>
+								<div className={classes.wrapper}>
+									<TextField 
+									 	label="Street" 
+									 	name="street"
+									 	type="text" 
+									 	onChange={this.onChange}
+									 	fullWidth
+									 	required
+									/>	
+								</div>
+							</Grid>
+							<Grid item style={{width: "100%"}}>
+								<div className={classes.wrapper}>
+									<TextField 
+									 	label="City" 
+									 	name="city"
+									 	onChange={this.onChange}
+									 	type="text" 
+									 	fullWidth
+									 	required 
+									/>	
+								</div>
+							</Grid>
+							<Grid item style={{width: "100%"}}>
+								<Grid
+								  container
+								  direction="row"
+								  justify="center"
+								  alignItems="center"
+								>	
+									<Grid item>
+										<div className={classes.wrapper}>
+											<TextField 
+											 	label="State" 
+											 	name="state"
+											 	onChange={this.onChange}
+											 	type="text" 
+											 	required 
+											/>
+										</div>
+									</Grid>
+									<Grid item>
+										<div className={classes.wrapper}>
+											<TextField 
+											 	label="Zip" 
+											 	name="zip"
+											 	onChange={this.onChange}
+											 	type="text" 
+											 	required 
+											/>	
+										</div>
+									</Grid>
 								</Grid>
 							</Grid>
-							<Grid container item xs={12} spacing={3}>
-								<Grid item xs={4}>
-									<TextField autoFocus margin="dense" id="city" label="City" type="text" required/>
-								</Grid>
-								<Grid item xs={2}>
-									<TextField inputProps={{
-										maxLength: 2,
-									}} margin="dense" id="state" label="State" type="text" required />
-								</Grid>
-								<Grid item xs={4}>
-									<TextField margin="dense" id="zip-code" label="Zip Code" type="text" required/>
-								</Grid>
+							<Grid item style={{width: "100%"}}>
+								<div className={classes.wrapper}>
+									<TextField 
+									 	label="Phone Number" 
+									 	name="phoneNumber"
+									 	onChange={this.onChange}
+									 	type="text" 
+									 	fullWidth
+									 	required 
+									/>	
+								</div>
 							</Grid>
-						</Grid>
-						<Grid container item xs={12}>
-							<Grid item xs={12}>
-								<input
-									accept=".pdf,.doc,.docx"
-									className={classes.input}
-									style={{ display: 'none' }}
-									id="raised-button-file"
-									type="file"
-								/>
-								<label htmlFor="raised-button-file">
-									<Button variant="raised" component="span" className={classes.button}>Upload Resume</Button>
-								</label>
-								<p></p>
+							<Grid item style={{width: "100%"}}>
+								<div className={classes.wrapper}>
+									<input
+										accept=".pdf,.doc,.docx"
+										className={classes.input}
+										style={{ display: 'none' }}
+										onChange={this.onChange}
+										id="raised-button-file"
+										type="file"
+										name="file"
+									/>
+									<label htmlFor="raised-button-file">
+										<Button variant="raised" component="span" className={classes.button}>Upload Resume</Button>
+									</label>
+								</div>
 							</Grid>
 						</Grid>
 					</DialogContent>
 					<DialogActions>
-						<Button onClick={this.handleApplyClose} color="primary">
+						<Button onClick={this.submit} color="primary">
 							Submit
 			          </Button>
 						<Button onClick={this.handleApplyClose} color="primary" autoFocus>
@@ -143,3 +236,50 @@ class ApplyToJobs extends Component {
 }
 
 export default withStyles(applyToJobsStyles)(ApplyToJobs)
+
+						// <Grid container spacing={.5}>
+						// 	<Grid container item xs={12} spacing={2}>
+						// 		<Grid item xs={6}>
+						// 			<TextField autoFocus margin="dense" id="first-name" label="First Name" type="text" required />
+						// 		</Grid>
+						// 		<Grid item xs={6}>
+						// 			<TextField margin="dense" id="last-name" label="Last Name" type="text" required/>
+						// 		</Grid>
+						// 	</Grid>
+						// 	<Grid container item xs={12} spacing={2}>
+						// 		<Grid item xs={6}>
+						// 			<TextField margin="dense" id="phone-number" label="Phone" type="tel" required/>
+						// 		</Grid>
+						// 		<Grid item xs={6}>
+						// 			<TextField autoFocus margin="dense" id="street" label="Street" type="text" required />
+						// 		</Grid>
+						// 	</Grid>
+						// 	<Grid container item xs={12} spacing={3}>
+						// 		<Grid item xs={4}>
+						// 			<TextField autoFocus margin="dense" id="city" label="City" type="text" required/>
+						// 		</Grid>
+						// 		<Grid item xs={2}>
+						// 			<TextField inputProps={{
+						// 				maxLength: 2,
+						// 			}} margin="dense" id="state" label="State" type="text" required />
+						// 		</Grid>
+						// 		<Grid item xs={4}>
+						// 			<TextField margin="dense" id="zip-code" label="Zip Code" type="text" required/>
+						// 		</Grid>
+						// 	</Grid>
+						// </Grid>
+						// <Grid container item xs={12}>
+						// 	<Grid item xs={12}>
+						// 		<input
+						// 			accept=".pdf,.doc,.docx"
+						// 			className={classes.input}
+						// 			style={{ display: 'none' }}
+						// 			id="raised-button-file"
+						// 			type="file"
+						// 		/>
+						// 		<label htmlFor="raised-button-file">
+						// 			<Button variant="raised" component="span" className={classes.button}>Upload Resume</Button>
+						// 		</label>
+						// 		<p></p>
+						// 	</Grid>
+						// </Grid>

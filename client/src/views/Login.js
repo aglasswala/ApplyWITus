@@ -5,7 +5,6 @@ import BackgroundSlider from 'react-background-slider'
 
 import loginStyles from "../styles/loginStyles"
 import image1 from "../styles/pictures/background1.jpg"
-import { loginUser } from '../api/api'
 
 class Login extends Component {
 
@@ -33,6 +32,7 @@ class Login extends Component {
 			.then(result => {
 				if (result.result === "success") {
 					this.props.history.push("/dashboard")
+					this.props.isAuth(email)
 				}
 			})
 			.catch(err => console.log(err))
