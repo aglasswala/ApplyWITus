@@ -5,4 +5,6 @@ module.exports = router => {
 
 	router.post('/register', handler.registerUser)
 	router.post('/login', handler.loginUser)
+
+	router.post('/postJobs', handler.postJobs)
 }
