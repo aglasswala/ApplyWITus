@@ -1,10 +1,10 @@
 const chrome = require('selenium-webdriver/chrome');
-const {Builder, By, Key, until} = require('selenium-webdriver');
+const {Builder, By} = require('selenium-webdriver');
 require('chromedriver');
 async function example() {
     let driver = await new Builder()
     .forBrowser('chrome')
-    .setChromeOptions(new chrome.Options().headless())
+    // .setChromeOptions(new chrome.Options().headless())
     .build();
         await driver.get("https://talentwwinc.applytojob.com/apply/QCBrTbdxGv/");
         await driver.findElement(By.id("resumator-firstname-value"))
@@ -45,7 +45,7 @@ async function example() {
         })
         await driver.findElement(By.id("resumator-resume-value"))
         .then( result => {
-            result.sendKeys("C:\\Users\\wingm\\Downloads\\SampleResume.pdf");
+            result.sendKeys("C:\\SampleResume.pdf");
         })
         .catch(err =>{
             console.log(err);
@@ -57,6 +57,6 @@ async function example() {
         .catch(err =>{
             console.log(err);
         })
-        driver.close();
+        // driver.close();
 }
 example();
