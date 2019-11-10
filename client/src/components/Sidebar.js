@@ -47,7 +47,7 @@ const Sidebar = ({...props}) => {
 		                            <ListItemText
 		                                primary={"Apply to jobs"}
 		                                className={classes.itemText}
-		                            	disableTypography={true}
+		                            	  disableTypography={true}
 		                            />
 	                            </ListItem>
 	                        </NavLink>

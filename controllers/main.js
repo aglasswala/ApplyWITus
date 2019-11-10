@@ -1,5 +1,9 @@
 const { loginUser, registerUser } = require("./users/users")
+<<<<<<< HEAD
 const { postJobs } = require('./jobs/jobs')
+=======
+const { apply } = require("./apply/apply")
+>>>>>>> fcce3cc170bbd344bedb57c2978a23e95db2da42
 
 module.exports = {
 	homepage: (req, res) => {
@@ -9,5 +13,6 @@ module.exports = {
 	},
 	loginUser,
 	registerUser,
-	postJobs
+	postJobs,
+	apply
 }

@@ -7,4 +7,5 @@ module.exports = router => {
 	router.post('/login', handler.loginUser)
 
 	router.post('/postJobs', handler.postJobs)
+	router.post('/apply', handler.apply)
 }
