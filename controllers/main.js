@@ -1,5 +1,4 @@
 const { loginUser, registerUser } = require("./users/users")
-const { postJobs } = require('./jobs/jobs')
 const { apply } = require("./apply/apply")
 
 module.exports = {
@@ -10,6 +9,5 @@ module.exports = {
 	},
 	loginUser,
 	registerUser,
-	postJobs,
 	apply
 }

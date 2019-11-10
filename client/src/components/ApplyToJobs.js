@@ -4,7 +4,7 @@ import { withStyles, Grid, Button, Dialog, DialogContent, DialogContentText, Dia
 
 import applyToJobsStyles from "../styles/applyToJobsStyles"
 import ApplyToJobsTable from "../components/ApplyToJobsTable"
-import { upload } from '../api/api'
+import upload from '../api/api'
 
 class ApplyToJobs extends Component {
 
