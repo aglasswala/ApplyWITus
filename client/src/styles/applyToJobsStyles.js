@@ -1,7 +1,7 @@
 const applyToJobsStyles = theme => ({
     dialogPaper: {
-      minHeight: '60vh',
-        maxHeight: '60vh',
+      minHeight: '85vh',
+        maxHeight: '85vh',
     },
     gridContainer: {
         margin: "0 -15px !important",
@@ -75,7 +75,10 @@ const applyToJobsStyles = theme => ({
         display: "inline-block"
     },
     wrapper: {  
-        padding: 20
+        paddingRight: 20,
+        paddingLeft: 20,
+        paddingTop: 10,
+        paddingBottom: 10
     }
 })
 
