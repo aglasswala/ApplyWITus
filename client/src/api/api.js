@@ -1,9 +1,10 @@
-const axios = require('axios')
+import axios from 'axios'
 
-module.exports = {
-    startSelenium: (data) => {
-        return axios.post('http://localhost:3001/applyJob', data)
-						.then(response => response)
-						.catch(err => err)
-    }
+
+const upload = (data, config) => {
+		return axios.post("http://localhost:3001/apply", data, config)
+				.then(response => response)
+				.catch(err => err)
 }
+
+export default upload

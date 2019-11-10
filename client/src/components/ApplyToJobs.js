@@ -4,7 +4,8 @@ import { withStyles, Grid, Button, Dialog, DialogContent, DialogContentText, Dia
 
 import applyToJobsStyles from "../styles/applyToJobsStyles"
 import ApplyToJobsTable from "../components/ApplyToJobsTable"
-import {startSelenium} from '../api/api'
+import upload from '../api/api'
+
 class ApplyToJobs extends Component {
 
 	state = {
@@ -32,12 +33,29 @@ class ApplyToJobs extends Component {
 		})
 	}
 
-	submit = () => {
+	submit = async () => {
 		this.setState({
 			applyOpen: false
 		})
-		
-		console.log(this.state) 
+
+		const { firstName, lastName, email, phoneNumber, street, city, state, zip, file } = this.state
+		const data = new FormData()
+
+    	data.append('file', this.state.file)
+    	data.append("firstName", firstName)
+    	data.append("lastName", lastName)
+    	data.append("email", email)
+    	data.append("phoneNumber", phoneNumber)
+
+    	const config = {
+    	    headers: {
+    	        'content-type': 'multipart/form-data'
+    	    }
+    	}
+
+    	await upload(data, config)
+    			.then(result => console.log(result))
+    			.catch(err => console.log(err))
 	}
 
 	onChange = (e) => this.setState({[e.target.name]: e.target.value})

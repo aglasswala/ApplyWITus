@@ -1,5 +1,8 @@
+const chrome = require('selenium-webdriver/chrome');
+const {Builder, By} = require('selenium-webdriver');
+require('chromedriver')
 module.exports = {
-	apply:  (firstName, lastName, email, phoneNumber) => new Promise(async (resolve, reject) => {
+	apply: (firstName, lastName, email, phoneNumber, path) => new Promise(async (resolve, reject) => {
 		let driver = await new Builder() .forBrowser('chrome')
 		  // .setChromeOptions(new chrome.Options().headless())
 		  .build()
@@ -47,7 +50,7 @@ module.exports = {
 	      })
 	      await driver.findElement(By.id("resumator-resume-value"))
 	      .then( result => {
-	          result.sendKeys("C:\\SampleResume.pdf")
+	          result.sendKeys(path)
 	          return resolve("YES MF")
 	      })
 	      .catch(err =>{

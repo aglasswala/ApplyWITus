@@ -9,6 +9,5 @@ module.exports = {
 	},
 	loginUser,
 	registerUser,
-	// postJobs,
 	apply
 }
