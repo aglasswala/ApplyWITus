@@ -4,7 +4,7 @@ import { withStyles, Grid, Button, Dialog, DialogContent, DialogContentText, Dia
 
 import applyToJobsStyles from "../styles/applyToJobsStyles"
 import ApplyToJobsTable from "../components/ApplyToJobsTable"
-
+import {startSelenium} from '../api/api'
 class ApplyToJobs extends Component {
 
 	state = { 
@@ -20,7 +20,22 @@ class ApplyToJobs extends Component {
 	handleApplyOpen = () => {
 		this.setState({
 			applyOpen: true
+		}, () =>{
+			const data = {
+				firstName: "Matt",
+				lastName: "Wing",
+				email: "mattdwing@gmail.com",
+				phone: "123456789"
+			}
+			startSelenium(data)
+			.then( ()=>{
+				console.log("I GOT IT")
+			})
+			.catch( err =>{
+				console.log(err);
+			})
 		})
+		
 	}
 
 

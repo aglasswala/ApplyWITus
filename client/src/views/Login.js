@@ -5,7 +5,6 @@ import BackgroundSlider from 'react-background-slider'
 
 import loginStyles from "../styles/loginStyles"
 import image1 from "../styles/pictures/background1.jpg"
-import { loginUser } from '../api/api'
 
 class Login extends Component {
 
