@@ -13,7 +13,7 @@ import Contact from '../components/Contact'
 class Dashboard extends Component {
 
 	render() {
-		const { classes } = this.props
+		const { classes, email } = this.props
 		return (
 			<div className={classes.wrapper}>
 				<Sidebar />
@@ -21,7 +21,7 @@ class Dashboard extends Component {
 					<div className={classes.content}>
 						<div className={classes.container}>
 							<Switch>
-								<Route exact path="/dashboard" component={ApplyToJobs} />
+								<Route exact path="/dashboard" component={() => <ApplyToJobs email={email} />} />
 								<Route exact path="/dashboard/jobs" component={Jobs} />
 								<Route exact path="/dashboard/userprofile" component={UpdateProfile} />
 								<Route exact path="/dashboard/contact" component={Contact} />
