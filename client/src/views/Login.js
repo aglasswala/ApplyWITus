@@ -50,7 +50,7 @@ class Login extends Component {
 						<div className={classes.signinBox}>
 							<div className={classes.signinContainer}>
 								<div className={classes.container}>
-									<div className={classes.overlay} style={{background: "primary"}}>
+									<div className={classes.overlay}>
 										<Typography variant="h3" align="center" style={{color: "white"}}>
 											Log In
 										</Typography>
@@ -63,6 +63,7 @@ class Login extends Component {
 													className={classes.textField}
 													onChange={this.onChange}
 													style={{marginTop: "30px"}}
+													autoFocus
 												/> 
 										</span>
 										<span className={classes.wrapper}>
@@ -88,7 +89,11 @@ class Login extends Component {
 									</span>
 									<div className={classes.actions}>
 										<Button> Forgot Password? </Button>
-										<Button> Sign Up </Button>
+										<Button
+											onClick={"window.location.reload()"}
+										> 
+											Sign Up 
+										</Button>
 									</div>
 								</div>
 							</div>

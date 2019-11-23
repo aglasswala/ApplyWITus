@@ -16,8 +16,11 @@ import registerStyles from "../styles/registerStyles"
 class Register extends Component {
 
     state = {
+        firstName: "",
+        lastName: "",
         email: "",
-        password: ""
+        password: "",
+
     }
 
     onChange = (e) => this.setState({ [e.target.name]: e.target.value })
@@ -49,14 +52,13 @@ class Register extends Component {
         const { classes } = this.props
         return (
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
                 <div className={classes.paper}>
                     <div className={classes.titlePaper}>
                     <Typography component="h1" variant="h5" style={{background: "primary"}}>
                         Register
                     </Typography>
                     </div>
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
