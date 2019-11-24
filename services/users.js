@@ -5,10 +5,9 @@ const { compareHash } = require('../utils/utils')
 const db = knex({
   client: 'pg',
   connection: {
-    host: '127.0.0.1',
-    user: 'postgres',
-    password: '1234',
-    database: 'postgres',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    database: process.env.DB_NAME,
   },
 })
 
@@ -30,7 +29,9 @@ module.exports = {
 
 		  	return reject("Incorrect email or password")
 		  })
-		  .catch(err => reject(err))
+		  .catch(err => {
+		  	console.log(err)
+		  })
 	}),
 	register: (email, password) => new Promise((resolve, reject) => {
 		db.transaction((trx) => {

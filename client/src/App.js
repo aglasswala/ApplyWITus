@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
 import Dashboard from "./views/Dashboard"
 import Login from "./views/Login"

@@ -1,103 +1,114 @@
-import React, { Component, Fragment } from 'react'
+import React, { useState } from 'react'
 
-import { Grid, Paper, withStyles, Typography, Button, TextField } from "@material-ui/core"
-import BackgroundSlider from 'react-background-slider'
+import { CssBaseline, Grid, Paper, Avatar, Typography, TextField, FormControlLabel, Checkbox, Button } from '@material-ui/core'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
-import loginStyles from "../styles/loginStyles"
-import image1 from "../styles/pictures/background1.jpg"
+import loginStyles from '../styles/loginStyles'
 
-class Login extends Component {
+const Login = ({ ...props }) => {
+	const [email, setEmail] = useState("")
+	const [password, setPassword] = useState("")
 
-	state = {
-		email: "",
-		password: ""
+	const handleEmail = (e) => {
+		return setEmail(e.target.value)
 	}
 
-	onChange = (e) => this.setState({[e.target.name]: e.target.value})
+	const handlePassword = (e) => {
+		return setPassword(e.target.value)
+	}
 
-	submit = async () => {
-		const { email, password } = this.state
-
+	const handleClick = (e) => {
+		e.preventDefault()
 		fetch("http://localhost:3001/login", {
-			method: 'post',
-		  	headers: {
-		    	'Content-Type': 'application/json'
-		  	},
-		  	body: JSON.stringify({
-		    	email,
-		      	password
-		  	})
-		})
-			.then(response => response.json())
-			.then(result => {
-				if (result.result === "success") {
-					this.props.history.push("/dashboard")
-					this.props.isAuth(email)
-				}
+			method: "post",
+			headers: {
+				'Content-Type': "application/json"
+			},
+			body: JSON.stringify({
+				email: email,
+				password: password
 			})
-			.catch(err => console.log(err))
+		})
+		.then(response => response.json()) 
+		.then(result => {
+			if (result.result === "success") {
+				props.history.push('/dashboard')
+			}
+		})
+		.catch(err => console.log(err)) // do something with this error
 	}
 
-	render() {
-		const { classes } = this.props
-		return (
-			<Fragment>
-				<BackgroundSlider
-				  images={[image1]}
-				  duration={2} transition={2} />
-				<div className={classes.placeHolderTop}>
-					<div className={classes.placeHolderBottom}>
-						<div className={classes.signinBox}>
-							<div className={classes.signinContainer}>
-								<div className={classes.container}>
-									<div className={classes.overlay} style={{background: "primary"}}>
-										<Typography variant="h3" align="center" style={{color: "white"}}>
-											Log In
-										</Typography>
-									</div>
-									<form className={classes.form}>
-										<span className={classes.wrapper}>
-											<TextField 
-													label="Email"
-													name="email"
-													className={classes.textField}
-													onChange={this.onChange}
-													style={{marginTop: "30px"}}
-												/> 
-										</span>
-										<span className={classes.wrapper}>
-											<TextField 
-												label="Password"
-												type="password"
-												name="password"
-												onChange={this.onChange}
-												className={classes.textField}
-												margin="normal"
-											/> 
-				                    	</span>
-									</form>
-									<span className={classes.wrapper}>
-										<Button
-											variant="contained"
-											color="primary"
-											className={classes.button}
-											onClick={this.submit}
-										>
-											Submit
-										</Button>
-									</span>
-									<div className={classes.actions}>
-										<Button> Forgot Password? </Button>
-										<Button> Sign Up </Button>
-									</div>
-								</div>
-							</div>
-						</div>
+	const classes = loginStyles()
+	return (
+		<div>
+			<CssBaseline />
+			<Grid container className={classes.root}>
+				<Grid item xs={false} sm={4} md={7} className={classes.image} />
+				<Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+					<div className={classes.paper}>
+						<Avatar className={classes.avatar}>
+						 	<LockOutlinedIcon />
+						</Avatar>
+						<Typography component="h1" variant="h5">
+						  Sign in
+						</Typography>
+						<form className={classes.form}>
+					    	<TextField
+					       		variant="filled"
+					       		margin="normal"
+					       		required
+					       		fullWidth
+					       		id="email"
+					       		label="Email Address"
+					       		name="email"
+					       		autoComplete="email"
+					       		autoFocus
+					       		onChange={handleEmail}
+					     	/>
+					     	<TextField
+					       		variant="filled"
+					       		margin="normal"
+					       		required
+					       		fullWidth
+					       		name="password"
+					       		label="Password"
+					       		type="password"
+					       		id="password"
+					       		autoComplete="current-password"
+					       		onChange={handlePassword}
+					     	/>
+						    <FormControlLabel
+						      	control={<Checkbox value="remember" color="primary" />}
+						       	label="Remember me"
+						    />
+						    <Button
+						       	type="submit"
+						       	fullWidth
+						       	variant="contained"
+						       	color="primary"
+						       	className={classes.submit}
+						       	onClick={handleClick}
+						    >
+						      	Sign In
+						    </Button>
+						    <Grid container>
+						       	<Grid item xs>
+						        	<Button href="#" variant="body2">
+						           		Forgot password?
+						         	</Button>
+						       	</Grid>
+						       	<Grid item>
+						         	<Button href="#" variant="body2">
+						           		{"Don't have an account? Sign Up"}
+						         	</Button>
+						       	</Grid>
+						    </Grid>
+					   	</form>
 					</div>
-				</div>
-			</Fragment>
-		)
-	}
+				</Grid>
+			</Grid>	
+		</div>
+	)
 }
 
-export default withStyles(loginStyles)(Login)
+export default Login
