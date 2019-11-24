@@ -1,15 +1,6 @@
 import React, { Component, Fragment } from 'react'
 
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import { Button, FormControlLabel, TextField, Checkbox, Link, Grid, Typography, Container, withStyles } from '@material-ui/core';
 
 import registerStyles from "../styles/registerStyles"
 
@@ -54,8 +45,8 @@ class Register extends Component {
             <Container component="main" maxWidth="xs">
                 <div className={classes.paper}>
                     <div className={classes.titlePaper}>
-                    <Typography component="h1" variant="h5" style={{background: "primary"}}>
-                        Register
+                        <Typography component="h1" variant="h5" style={{ background: "primary" }}>
+                            Register
                     </Typography>
                     </div>
                     <form className={classes.form}>
