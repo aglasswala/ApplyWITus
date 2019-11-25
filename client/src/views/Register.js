@@ -31,16 +31,6 @@ const Register = ({ ...props }) => {
         return setConfirmPassword(e.target.value)
     }
 
-    const handleClickShowPassword = () => {
-        let passwordInput = document.getElementById("password").type = "text"
-        if (passwordInput.type = "password") {
-            passwordInput.type = "text"
-        } else {
-            passwordInput.type = "password"
-        }
-        
-      };
-
     const handleClick = (e) => {
 		e.preventDefault()
 		fetch("http://localhost:3001/register", {
@@ -63,7 +53,7 @@ const Register = ({ ...props }) => {
 			}
 		})
 		.catch(err => console.log(err)) // do something with this error
-	}
+    }
 
     const classes = registerStyles()
     return (
@@ -79,7 +69,7 @@ const Register = ({ ...props }) => {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    autoComplete="fname"
+                                    autoComplete="firstName"
                                     name="firstName"
                                     variant="outlined"
                                     required
@@ -87,6 +77,7 @@ const Register = ({ ...props }) => {
                                     id="firstName"
                                     label="First Name"
                                     autoFocus
+                                    onChange={handleFirstName}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -97,7 +88,8 @@ const Register = ({ ...props }) => {
                                     id="lastName"
                                     label="Last Name"
                                     name="lastName"
-                                    autoComplete="lname"
+                                    autoComplete="lastName"
+                                    onChange={handleLastName}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -109,6 +101,7 @@ const Register = ({ ...props }) => {
                                     label="Email Address"
                                     name="email"
                                     autoComplete="email"
+                                    onChange={handleEmail}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -121,7 +114,8 @@ const Register = ({ ...props }) => {
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
-                                />
+                                    onChange={handlePassword}
+                              />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
@@ -132,7 +126,8 @@ const Register = ({ ...props }) => {
                                     label="Confirm Password"
                                     type="password"
                                     id="confirmPassword"
-                                    autoComplete="current-password"
+                                    autoComplete="confirmPassword"
+                                    onChange={handleConfirmPassword}
                                 />
                             </Grid>
                         </Grid>
@@ -142,12 +137,13 @@ const Register = ({ ...props }) => {
                             variant="contained"
                             color="primary"
                             className={classes.submit}
+                            onClick={handleClick}
                         >
                             Sign Up
           </Button>
                         <Grid container justify="flex-end">
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link href="./login" variant="body2">
                                     Already have an account? Sign in
               </Link>
                             </Grid>
