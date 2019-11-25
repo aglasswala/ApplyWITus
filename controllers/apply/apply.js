@@ -4,8 +4,6 @@ module.exports = {
 	apply: (req, res) => {
 		const { firstName, lastName, email, phoneNumber, path } = req.body
 
-		console.log(req)
-
 		const dirname = __dirname.substring(0, 58) + "/uploads/" + req.file.originalname 
 
 		return jobService.apply(firstName, lastName, email, phoneNumber, dirname)	

@@ -1,47 +1,73 @@
-import React, { Component, Fragment } from 'react'
+import React, { useState } from 'react'
 
-import { Button, FormControlLabel, TextField, Checkbox, Link, Grid, Typography, Container, withStyles } from '@material-ui/core';
+import { Button, TextField, Link, Grid, Typography, Container } from '@material-ui/core';
 
 import registerStyles from "../styles/registerStyles"
 
-class Register extends Component {
+const Register = ({ ...props }) => {
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
 
-    state = {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-
+    const handleFirstName = (e) => {
+		return setFirstName(e.target.value)
+    }
+    
+    const handleLastName = (e) => {
+		return setLastName(e.target.value)
     }
 
-    onChange = (e) => this.setState({ [e.target.name]: e.target.value })
-
-    register = async () => {
-        const { email, password } = this.state
-
-        fetch("http://localhost:3001/register", {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
-        })
-            .then(response => response.json())
-            .then(result => {
-                if (result.result === "success") {
-                    this.props.history.push("/dashboard")
-                    this.props.isAuth(email)
-                }
-            })
-            .catch(err => console.log(err))
+    const handleEmail = (e) => {
+		return setEmail(e.target.value)
+    }
+    
+    const handlePassword = (e) => {
+		return setPassword(e.target.value)
+    }
+    
+    const handleConfirmPassword = (e) => {
+        return setConfirmPassword(e.target.value)
     }
 
-    render() {
-        const { classes } = this.props
-        return (
+    const handleClickShowPassword = () => {
+        let passwordInput = document.getElementById("password").type = "text"
+        if (passwordInput.type = "password") {
+            passwordInput.type = "text"
+        } else {
+            passwordInput.type = "password"
+        }
+        
+      };
+
+    const handleClick = (e) => {
+		e.preventDefault()
+		fetch("http://localhost:3001/register", {
+			method: "post",
+			headers: {
+				'Content-Type': "application/json"
+			},
+			body: JSON.stringify({
+                firstName: firstName,
+                lastName: lastName,
+				email: email,
+                password: password,
+                confirmPassword: confirmPassword
+			})
+		})
+		.then(response => response.json()) 
+		.then(result => {
+			if (result.result === "success") {
+				props.history.push('/dashboard')
+			}
+		})
+		.catch(err => console.log(err)) // do something with this error
+	}
+
+    const classes = registerStyles()
+    return (
+        <div>
             <Container component="main" maxWidth="xs">
                 <div className={classes.paper}>
                     <div className={classes.titlePaper}>
@@ -49,7 +75,7 @@ class Register extends Component {
                             Register
                     </Typography>
                     </div>
-                    <form className={classes.form}>
+                    <form className={classes.form} noValidate>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
@@ -98,9 +124,15 @@ class Register extends Component {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <FormControlLabel
-                                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                    label="Send emails updating me about new job opportunities."
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="confirmPassword"
+                                    label="Confirm Password"
+                                    type="password"
+                                    id="confirmPassword"
+                                    autoComplete="current-password"
                                 />
                             </Grid>
                         </Grid>
@@ -123,8 +155,8 @@ class Register extends Component {
                     </form>
                 </div>
             </Container>
+            </div>
         )
-    }
 }
 
-export default withStyles(registerStyles)(Register)
+export default Register

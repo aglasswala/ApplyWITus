@@ -1,4 +1,6 @@
-const registerStyles = theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+const registerStyles = makeStyles((theme) => ({
 	'@global': {
 		body: {
 			backgroundColor: 'lightblue',
@@ -10,7 +12,7 @@ const registerStyles = theme => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		backgroundColor: 'white',
-		borderRadius: '25px',
+		borderRadius: '10px',
 		padding: '40px',
 		marginTop: theme.spacing(3)
 	},
@@ -36,6 +38,6 @@ const registerStyles = theme => ({
 	submit: {
 		margin: theme.spacing(3, 0, 2),
 	},
-})
+}))
 
 export default registerStyles

@@ -7,7 +7,7 @@ import sidebarStyles from "../styles/sidebarStyles"
 import image from "../styles/pictures/background1.jpg"
 
 const Sidebar = ({...props}) => {
-    const { classes, logo } = props
+    const { classes } = props
 
     const brand = (
         <div className={classes.logo}>

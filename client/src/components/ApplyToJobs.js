@@ -33,6 +33,12 @@ class ApplyToJobs extends Component {
 		})
 	}
 
+	onChangeHandler = event => {
+	  this.setState({
+	    file: event.target.files[0],
+	  })
+	} 
+
 	submit = async () => {
 		this.setState({
 			applyOpen: false
@@ -63,7 +69,6 @@ class ApplyToJobs extends Component {
 	render() {
 		const { classes } = this.props
 		const { applyOpen } = this.state
-		console.log(this.state)
 		return (
 			<div>
 				<Grid className={classes.gridContainer}>
@@ -228,7 +233,7 @@ class ApplyToJobs extends Component {
 										accept=".pdf,.doc,.docx"
 										className={classes.input}
 										style={{ display: 'none' }}
-										onChange={this.onChange}
+										onChange={this.onChangeHandler}
 										id="raised-button-file"
 										type="file"
 										name="file"
@@ -255,50 +260,3 @@ class ApplyToJobs extends Component {
 }
 
 export default withStyles(applyToJobsStyles)(ApplyToJobs)
-
-						// <Grid container spacing={.5}>
-						// 	<Grid container item xs={12} spacing={2}>
-						// 		<Grid item xs={6}>
-						// 			<TextField autoFocus margin="dense" id="first-name" label="First Name" type="text" required />
-						// 		</Grid>
-						// 		<Grid item xs={6}>
-						// 			<TextField margin="dense" id="last-name" label="Last Name" type="text" required/>
-						// 		</Grid>
-						// 	</Grid>
-						// 	<Grid container item xs={12} spacing={2}>
-						// 		<Grid item xs={6}>
-						// 			<TextField margin="dense" id="phone-number" label="Phone" type="tel" required/>
-						// 		</Grid>
-						// 		<Grid item xs={6}>
-						// 			<TextField autoFocus margin="dense" id="street" label="Street" type="text" required />
-						// 		</Grid>
-						// 	</Grid>
-						// 	<Grid container item xs={12} spacing={3}>
-						// 		<Grid item xs={4}>
-						// 			<TextField autoFocus margin="dense" id="city" label="City" type="text" required/>
-						// 		</Grid>
-						// 		<Grid item xs={2}>
-						// 			<TextField inputProps={{
-						// 				maxLength: 2,
-						// 			}} margin="dense" id="state" label="State" type="text" required />
-						// 		</Grid>
-						// 		<Grid item xs={4}>
-						// 			<TextField margin="dense" id="zip-code" label="Zip Code" type="text" required/>
-						// 		</Grid>
-						// 	</Grid>
-						// </Grid>
-						// <Grid container item xs={12}>
-						// 	<Grid item xs={12}>
-						// 		<input
-						// 			accept=".pdf,.doc,.docx"
-						// 			className={classes.input}
-						// 			style={{ display: 'none' }}
-						// 			id="raised-button-file"
-						// 			type="file"
-						// 		/>
-						// 		<label htmlFor="raised-button-file">
-						// 			<Button variant="raised" component="span" className={classes.button}>Upload Resume</Button>
-						// 		</label>
-						// 		<p></p>
-						// 	</Grid>
-						// </Grid>
