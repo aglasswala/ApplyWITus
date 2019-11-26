@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 
 import Dashboard from "./views/Dashboard"
 import Login from "./views/Login"
+import Register from "./views/Register"
 
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
             <div>
             	<Switch>
             		<Route exact strict path="/dashboard" component={({...props}) => <Dashboard {...props} email={this.state.email} /> } />
+                    <Route exact strict path="/register" component={({...props}) => <Register {...props} />} /> 
                 	<Route component={({...props}) => <Login {...props} isAuth={this.isAuthenticated} />} />
                 </Switch>
             </div>
