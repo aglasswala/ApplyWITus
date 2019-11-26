@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { InputAdornment, IconButton, FormHelperText, FormControl, InputLabel, Input, CssBaseline, Grid, Paper, Avatar, Typography, TextField, FormControlLabel, Checkbox, Button, CircularProgress } from '@material-ui/core'
+import { InputAdornment, IconButton, FormHelperText, CssBaseline, Grid, Paper, Avatar, Typography, TextField, FormControlLabel, Checkbox, Button, CircularProgress } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -14,6 +14,7 @@ const Login = ({ ...props }) => {
 	const [loading, isLoading] = useState(false)
 	const [errors, setErrors] = useState({})
 	const [showPassword, setShowPassword] = useState(false)
+	const [rememberMe, setRememberMe] = useState(false)
 
 	const handleEmail = (e) => {
 		return setEmail(e.target.value)
@@ -32,9 +33,12 @@ const Login = ({ ...props }) => {
 	}	
 
 	const handleShowPassword = () => {
-		return setShowPassword(!!showPassword)
+		return setShowPassword(!showPassword)
 	}
 
+	const handleRememberMe = () => {
+		return setRememberMe(!rememberMe)
+	}
 
 	const validate = (email, password) => {
 	    const errors = {}
@@ -46,7 +50,9 @@ const Login = ({ ...props }) => {
 	const handleClick = async (e) => {
 		e.preventDefault()
 		handleLoading(true)
+
 		const val = validate(email, password)
+		
 		if (Object.keys(val).length !== 0) {
 			handleLoading(false)
 			return handleErrors(val)
@@ -64,9 +70,12 @@ const Login = ({ ...props }) => {
 		})
 		.then(response => response.json()) 
 		.then(result => {
-			console.log(result)
 			if (result.err) {
 				throw new Error(result.err)
+			}
+
+			if (rememberMe) {
+				localStorage.setItem('cool-jwt', result.token)
 			}
 
 			if (result.result === "success") {
@@ -110,7 +119,7 @@ const Login = ({ ...props }) => {
 					       		autoFocus
 					       		onChange={handleEmail}
 					     	/>
-					     	{errors.email ? <FormHelperText>Invalid Email</FormHelperText> : null}
+					     	{errors.email ? <FormHelperText error>Invalid Email</FormHelperText> : null}
 					     	<TextField
 					     		error={errors.password}
 					       		variant="filled"
@@ -120,7 +129,7 @@ const Login = ({ ...props }) => {
 					       		disabled={loading}
 					       		name="password"
 					       		label="Password"
-					       		type="password"
+					       		type={showPassword ? "text" : "password"}
 					       		id="password"
 					       		autoComplete="current-password"
 					       		onChange={handlePassword}
@@ -128,18 +137,17 @@ const Login = ({ ...props }) => {
 					       		    endAdornment: (
 					       		      <InputAdornment position='end'>
 					       		        <IconButton
-					       		          aria-label='toggle password visibility'
 					       		          onClick={handleShowPassword}>
-					       		          {showPassword && <Visibility />}
-					       		          {!showPassword && <VisibilityOff />}
+					       		          {!showPassword && <Visibility />}
+					       		          {showPassword && <VisibilityOff />}
 					       		        </IconButton>
 					       		      </InputAdornment>
 					       		    ),
 					       		  }}
 					     	/>
-					     	{errors.password ? <FormHelperText>Invalid Password</FormHelperText> : null}
+					     	{errors.password ? <FormHelperText error>Invalid Password</FormHelperText> : null}
 						    <FormControlLabel
-						      	control={<Checkbox value="remember" color="primary" />}
+						      	control={<Checkbox onClick={handleRememberMe} value="remember" color="primary" />}
 						       	label="Remember me"
 						    />
 						    <Button
