@@ -29,9 +29,7 @@ module.exports = {
 
 		  	return reject("Incorrect email or password")
 		  })
-		  .catch(err => {
-		  	console.log(err)
-		  })
+		  .catch(err => reject(new Error(err)))
 	}),
 	register: (email, password) => new Promise((resolve, reject) => {
 		db.transaction((trx) => {

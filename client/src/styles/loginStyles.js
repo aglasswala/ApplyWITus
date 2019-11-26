@@ -28,6 +28,14 @@ const loginStyles = makeStyles((theme) => ({
 	submit: {
 	  	margin: theme.spacing(3, 0, 2),
 	},
+	buttonProgress: {
+	  	color: theme.palette.primary.main,
+	  	position: 'absolute',
+	  	top: '50%',
+	  	left: '50%',
+	  	marginTop: -200,
+	  	marginLeft: 350,
+	},
 }))
 
 export default loginStyles

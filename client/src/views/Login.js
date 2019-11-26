@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
 
-import { CssBaseline, Grid, Paper, Avatar, Typography, TextField, FormControlLabel, Checkbox, Button } from '@material-ui/core'
+import { InputAdornment, IconButton, FormHelperText, FormControl, InputLabel, Input, CssBaseline, Grid, Paper, Avatar, Typography, TextField, FormControlLabel, Checkbox, Button, CircularProgress } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Validator from 'validator'
 
 import loginStyles from '../styles/loginStyles'
 
 const Login = ({ ...props }) => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
+	const [loading, isLoading] = useState(false)
+	const [errors, setErrors] = useState({})
+	const [showPassword, setShowPassword] = useState(false)
 
 	const handleEmail = (e) => {
 		return setEmail(e.target.value)
@@ -17,8 +23,35 @@ const Login = ({ ...props }) => {
 		return setPassword(e.target.value)
 	}
 
-	const handleClick = (e) => {
+	const handleLoading = (loading) => {
+		return isLoading(loading)
+	}	
+
+	const handleErrors = (errs) => {
+		return setErrors(errs)
+	}	
+
+	const handleShowPassword = () => {
+		return setShowPassword(!!showPassword)
+	}
+
+
+	const validate = (email, password) => {
+	    const errors = {}
+	    if(!Validator.isEmail(email)) errors.email = "Invalid Email";
+	    if(!password) errors.password = "Can't be blank";
+	    return errors
+	}
+
+	const handleClick = async (e) => {
 		e.preventDefault()
+		handleLoading(true)
+		const val = validate(email, password)
+		if (Object.keys(val).length !== 0) {
+			handleLoading(false)
+			return handleErrors(val)
+		}
+
 		fetch("http://localhost:3001/login", {
 			method: "post",
 			headers: {
@@ -31,11 +64,20 @@ const Login = ({ ...props }) => {
 		})
 		.then(response => response.json()) 
 		.then(result => {
+			console.log(result)
+			if (result.err) {
+				throw new Error(result.err)
+			}
+
 			if (result.result === "success") {
 				props.history.push('/dashboard')
+				handleLoading(false)
 			}
 		})
-		.catch(err => console.log(err)) // do something with this error
+		.catch(err => {
+			handleLoading(false)
+			handleErrors({ err })
+		})
 	}
 
 	const classes = loginStyles()
@@ -52,12 +94,15 @@ const Login = ({ ...props }) => {
 						<Typography component="h1" variant="h5">
 						  Sign in
 						</Typography>
+						{ errors.err ? <FormHelperText error>Invalid Email or Password</FormHelperText> : null }
 						<form className={classes.form}>
 					    	<TextField
+					    		error={errors.email}
 					       		variant="filled"
 					       		margin="normal"
 					       		required
 					       		fullWidth
+					       		disabled={loading}
 					       		id="email"
 					       		label="Email Address"
 					       		name="email"
@@ -65,18 +110,34 @@ const Login = ({ ...props }) => {
 					       		autoFocus
 					       		onChange={handleEmail}
 					     	/>
+					     	{errors.email ? <FormHelperText>Invalid Email</FormHelperText> : null}
 					     	<TextField
+					     		error={errors.password}
 					       		variant="filled"
 					       		margin="normal"
 					       		required
 					       		fullWidth
+					       		disabled={loading}
 					       		name="password"
 					       		label="Password"
 					       		type="password"
 					       		id="password"
 					       		autoComplete="current-password"
 					       		onChange={handlePassword}
+					       		InputProps={{
+					       		    endAdornment: (
+					       		      <InputAdornment position='end'>
+					       		        <IconButton
+					       		          aria-label='toggle password visibility'
+					       		          onClick={handleShowPassword}>
+					       		          {showPassword && <Visibility />}
+					       		          {!showPassword && <VisibilityOff />}
+					       		        </IconButton>
+					       		      </InputAdornment>
+					       		    ),
+					       		  }}
 					     	/>
+					     	{errors.password ? <FormHelperText>Invalid Password</FormHelperText> : null}
 						    <FormControlLabel
 						      	control={<Checkbox value="remember" color="primary" />}
 						       	label="Remember me"
@@ -86,19 +147,21 @@ const Login = ({ ...props }) => {
 						       	fullWidth
 						       	variant="contained"
 						       	color="primary"
+						       	disabled={loading}
 						       	className={classes.submit}
 						       	onClick={handleClick}
 						    >
 						      	Sign In
 						    </Button>
+						    {loading && <CircularProgress size={128} className={classes.buttonProgress} />}
 						    <Grid container>
 						       	<Grid item xs>
-						        	<Button href="#" variant="body2">
+						        	<Button href="#">
 						           		Forgot password?
 						         	</Button>
 						       	</Grid>
 						       	<Grid item>
-						         	<Button href="#" variant="body2">
+						         	<Button href="#">
 						           		{"Don't have an account? Sign Up"}
 						         	</Button>
 						       	</Grid>

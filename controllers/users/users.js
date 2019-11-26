@@ -7,7 +7,7 @@ module.exports = {
 
 		return userService.login(email, password)
 				.then(result => res.status(200).send({ result: "success" }))
-				.catch(err => res.status(400).send({ err: err }))
+				.catch(err => res.status(404).send({ err: err }))
 	},
 	registerUser: (req, res) => {
 		const { email, password, repassword } = req.body
