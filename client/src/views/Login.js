@@ -93,6 +93,19 @@ const Login = ({ ...props }) => {
 	return (
 		<div>
 			<CssBaseline />
+				{loading ? 
+					<Grid
+					  container
+					  direction="column"
+					  justify="center"
+					  alignItems="center"
+					  style={{height: "100vh"}}
+					>
+						<Grid item>
+							<CircularProgress size={128} />		
+						</Grid>
+					</Grid> : null
+				}
 			<Grid container className={classes.root}>
 				<Grid item xs={false} sm={4} md={7} className={classes.image} />
 				<Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -161,7 +174,6 @@ const Login = ({ ...props }) => {
 						    >
 						      	Sign In
 						    </Button>
-						    {loading && <CircularProgress size={128} className={classes.buttonProgress} />}
 						    <Grid container>
 						       	<Grid item xs>
 						        	<Button href="#">
