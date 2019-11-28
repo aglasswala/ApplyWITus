@@ -13,6 +13,11 @@ const ApplyToJobs = ({ ...props }) => {
 		return setApply(!applyDialog)
 	}
 
+	const handleLogout = () => {
+		localStorage.removeItem("cool-jwt")
+		props.history.push("/login")
+	}
+
 	const { classes } = props
 	return (
 		<div>
@@ -28,7 +33,7 @@ const ApplyToJobs = ({ ...props }) => {
 							<Button variant="contained" color="primary" onClick={handleApply}> Apply </Button>
 						</Grid>
 						<Grid item>
-							<Button color="primary"> Logout </Button>
+							<Button onClick={handleLogout} color="primary"> Logout </Button>
 						</Grid>
 					</Grid>
 				</Grid>
