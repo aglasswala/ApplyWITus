@@ -13,8 +13,7 @@ const registerStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		backgroundColor: 'white',
 		borderRadius: '10px',
-		padding: '40px',
-		marginTop: theme.spacing(3)
+		padding: '40px'
 	},
 	titlePaper: {
 		display: 'flex',

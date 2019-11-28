@@ -185,7 +185,7 @@ const Login = ({ ...props }) => {
 						         	</Button>
 						       	</Grid>
 						       	<Grid item>
-						         	<Button href="#">
+						         	<Button href="/register">
 						           		{"Don't have an account? Sign Up"}
 						         	</Button>
 						       	</Grid>

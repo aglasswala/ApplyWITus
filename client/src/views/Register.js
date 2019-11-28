@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { Button, TextField, Link, Grid, Typography, Container } from '@material-ui/core';
 
@@ -43,17 +43,24 @@ const Register = ({ ...props }) => {
                 lastName: lastName,
 				email: email,
                 password: password,
-                confirmPassword: confirmPassword
+                repassword: confirmPassword
 			})
 		})
 		.then(response => response.json()) 
 		.then(result => {
 			if (result.result === "success") {
+                localStorage.setItem("cool-jwt", result.token)
 				props.history.push('/dashboard')
 			}
 		})
 		.catch(err => console.log(err)) // do something with this error
     }
+
+    useEffect(() => {
+        if (localStorage.getItem("cool-jwt")) {
+            props.history.push("/dashboard")
+        }
+    })
 
     const classes = registerStyles()
     return (
