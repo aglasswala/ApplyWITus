@@ -3,18 +3,19 @@ import { makeStyles } from '@material-ui/core/styles';
 const registerStyles = makeStyles((theme) => ({
 	'@global': {
 		body: {
-			backgroundColor: 'lightblue',
+			backgroundImage: "url('http://eskipaper.com/images/background-3.jpg')",
 		},
 	},
+	main: {
+		padding: '1vh'
+	},
 	paper: {
-		marginTop: theme.spacing(3),
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
 		backgroundColor: 'white',
 		borderRadius: '10px',
 		padding: '40px',
-		marginTop: theme.spacing(3)
 	},
 	titlePaper: {
 		display: 'flex',

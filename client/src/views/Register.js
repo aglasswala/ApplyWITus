@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 
-import { Button, TextField, Link, Grid, Typography, Container } from '@material-ui/core';
+import { Button, TextField, Link, Grid, Typography, Container, CircularProgress, FormHelperText } from '@material-ui/core';
 
-import registerStyles from "../styles/registerStyles"
+import registerStyles from '../styles/registerStyles'
+import Validator from 'validator'
 
 const Register = ({ ...props }) => {
     const [firstName, setFirstName] = useState("")
@@ -10,6 +11,8 @@ const Register = ({ ...props }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+    const [loading, isLoading] = useState(false)
+	const [errors, setErrors] = useState({})
 
     const handleFirstName = (e) => {
 		return setFirstName(e.target.value)
@@ -31,8 +34,33 @@ const Register = ({ ...props }) => {
         return setConfirmPassword(e.target.value)
     }
 
+    const handleLoading = (loading) => {
+		return isLoading(loading)
+	}	
+
+	const handleErrors = (errs) => {
+		return setErrors(errs)
+	}
+
+    const validate = (firstName, email, password) => {
+        const errors = {}
+        if(!firstName) errors.firstName = "blank";
+	    if(!Validator.isEmail(email)) errors.email = "Invalid Email";
+	    if(!password) errors.password = "Can't be blank";
+	    return errors
+	}
+
     const handleClick = (e) => {
 		e.preventDefault()
+		handleLoading(true)
+
+		const val = validate(email, password)
+		
+		if (Object.keys(val).length !== 0) {
+			handleLoading(false)
+			return handleErrors(val)
+        }
+        
 		fetch("http://localhost:3001/register", {
 			method: "post",
 			headers: {
@@ -58,17 +86,31 @@ const Register = ({ ...props }) => {
     const classes = registerStyles()
     return (
         <div>
-            <Container component="main" maxWidth="xs">
+            {loading ?
+                <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                    style={{ height: "100vh" }}
+                >
+                    <Grid item>
+                        <CircularProgress size={128} />
+                    </Grid>
+                </Grid> : null
+            }
+            <Container component="main" maxWidth="xs" className={classes.main}>
                 <div className={classes.paper}>
                     <div className={classes.titlePaper}>
                         <Typography component="h1" variant="h5" style={{ background: "primary" }}>
                             Register
                     </Typography>
                     </div>
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
+                                    error={errors.firstName}
                                     autoComplete="firstName"
                                     name="firstName"
                                     variant="outlined"
@@ -94,6 +136,7 @@ const Register = ({ ...props }) => {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    error={errors.email}
                                     variant="outlined"
                                     required
                                     fullWidth
