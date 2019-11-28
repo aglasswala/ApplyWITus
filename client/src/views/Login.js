@@ -99,7 +99,7 @@ const Login = ({ ...props }) => {
 					  direction="column"
 					  justify="center"
 					  alignItems="center"
-					  style={{height: "100vh"}}
+					  className={classes.fullHeight}
 					>
 						<Grid item>
 							<CircularProgress size={128} />		

@@ -36,6 +36,9 @@ const loginStyles = makeStyles((theme) => ({
 	  	marginTop: -200,
 	  	marginLeft: 350,
 	},
+	fullHeight: {
+		height: "100vh"
+	}
 }))
 
 export default loginStyles
