@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { InputAdornment, IconButton, FormHelperText, CssBaseline, Grid, Paper, Avatar, Typography, TextField, FormControlLabel, Checkbox, Button, CircularProgress } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -86,6 +86,12 @@ const Login = ({ ...props }) => {
 			handleErrors({ err })
 		})
 	}
+
+	useEffect(() => {
+		if (localStorage.getItem("cool-jwt")) {
+			props.history.push("/dashboard")
+		}
+	})
 
 	const classes = loginStyles()
 	return (

@@ -94,25 +94,6 @@ const Sidebar = ({...props}) => {
                               </ListItem>
                             </NavLink>
                           </Grid>
-                          <Grid item>
-                            <Grid
-                              container
-                              direction="column"
-                              justify="flex-end"
-                            >
-                              <Grid item>
-                                <div className={classes.activePro}>
-                                  <ListItem button className={classes.itemLink}>
-                                    <ListItemText
-                                      primary={"Logout"}
-                                      className={classes.itemText}
-                                      disableTypography={true}
-                                    />
-                                  </ListItem>
-                                </div>
-                              </Grid>
-                            </Grid>
-                          </Grid>
                         </Grid>
                       </List>
                     </div>
