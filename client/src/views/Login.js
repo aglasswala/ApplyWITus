@@ -65,7 +65,8 @@ const Login = ({ ...props }) => {
 			},
 			body: JSON.stringify({
 				email: email,
-				password: password
+				password: password,
+				remember: rememberMe
 			})
 		})
 		.then(response => response.json()) 
@@ -74,13 +75,10 @@ const Login = ({ ...props }) => {
 				throw new Error(result.err)
 			}
 
-			if (rememberMe) {
-				localStorage.setItem('cool-jwt', result.token)
-			}
-
 			if (result.result === "success") {
-				props.history.push('/dashboard')
 				handleLoading(false)
+				localStorage.setItem('cool-jwt', result.token)
+				props.history.push('/dashboard')
 			}
 		})
 		.catch(err => {
