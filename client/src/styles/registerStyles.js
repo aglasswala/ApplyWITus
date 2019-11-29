@@ -7,23 +7,13 @@ const registerStyles = makeStyles((theme) => ({
 		},
 	},
 	paper: {
-		marginTop: theme.spacing(3),
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
 		backgroundColor: 'white',
 		borderRadius: '10px',
-		padding: '40px'
 	},
 	titlePaper: {
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
 		borderRadius: '5px',
 		color: 'white',
-		padding: '20px 0px 20px 0px',
 		backgroundColor: '#2196f3',
-		width: '80%',
 
 	},
 	avatar: {
