@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const onboardingStyles = makeStyles((theme) => ({
 	wrapper: {
-		padding: 20
+		padding: 20,
 	},
 	uploadButton: {
 		width: "100%",

@@ -79,21 +79,7 @@ const Sidebar = ({...props}) => {
                                 />
                               </ListItem>
                             </NavLink>
-                            <NavLink
-                              to={"/dashboard/contact"}
-                              exact
-                              className={classes.item}
-                              activeClassName="active"
-                            >
-                              <ListItem button className={classes.itemLink}>
-                                <ListItemText
-                                  primary={"Contact Us"}
-                                  className={classes.itemText}
-                                  disableTypography={true}
-                                />
-                              </ListItem>
-                            </NavLink>
-                          </Grid>
+                            </Grid>
                         </Grid>
                       </List>
                     </div>

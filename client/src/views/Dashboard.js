@@ -8,7 +8,6 @@ import Sidebar from "../components/Sidebar"
 import ApplyToJobs from '../components/ApplyToJobs'
 import Jobs from '../components/Jobs'
 import UpdateProfile from '../components/UpdateProfile'
-import Contact from '../components/Contact'
 
 const Dashboard = ({ ...props }) => {
 	const { classes } = props
@@ -22,7 +21,6 @@ const Dashboard = ({ ...props }) => {
 							<Route exact path="/dashboard" component={ApplyToJobs} />
 							<Route exact path="/dashboard/jobs" component={Jobs} />
 							<Route exact path="/dashboard/userprofile" component={UpdateProfile} />
-							<Route exact path="/dashboard/contact" component={Contact} />
 						</Switch>
 					</div>	
 				</div>
