@@ -7,6 +7,7 @@ import Login from "./views/Login"
 import Register from "./views/Register"
 import PrivateRoute from "./utils/PrivateRoute"
 import Onboarding from './views/Onboarding'
+import Home from './views/Home'
 
 const App = () => {
     return (
@@ -15,7 +16,8 @@ const App = () => {
                 <PrivateRoute path="/dashboard" component={Dashboard} />
                 <PrivateRoute path="/onboarding" component={Onboarding} />
                 <Route exact path="/register" component={Register} /> 
-                <Route component={Login} />
+                <Route exact path="/login" component={Login} /> 
+                <Route component={Home} />
             </Switch>
         </div>
     )
