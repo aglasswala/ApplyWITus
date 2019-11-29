@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { withStyles } from "@material-ui/core"
 import { Route, Switch } from 'react-router-dom'
@@ -11,7 +11,7 @@ import UpdateProfile from '../components/UpdateProfile'
 import Contact from '../components/Contact'
 
 const Dashboard = ({ ...props }) => {
-	const { classes, email } = props
+	const { classes } = props
 	return (
 		<div className={classes.wrapper}>
 			<Sidebar />
