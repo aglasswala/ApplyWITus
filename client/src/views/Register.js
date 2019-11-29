@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { CssBaseline, Button, TextField, Link, Grid, Typography, Container } from '@material-ui/core';
+import { CssBaseline, Button, TextField, Link, Grid, Typography } from '@material-ui/core';
 
 import registerStyles from "../styles/registerStyles"
 
@@ -73,7 +73,7 @@ const Register = ({ ...props }) => {
                 alignItems="center"
                 style={{height: "100vh"}}
             >
-                <Grid item>
+                <Grid item className={classes.mainItem}>
                     <div className={classes.paper}>
                         <div className={classes.titlePaper}>
                             <Typography component="h1" variant="h5" style={{ background: "primary" }}>
