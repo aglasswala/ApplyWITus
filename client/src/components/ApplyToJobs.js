@@ -8,9 +8,14 @@ import upload from '../api/api'
 
 const ApplyToJobs = ({ ...props }) => {
 	const [applyDialog, setApply] = useState(false)
+	const [openOnboarding, setOnboarding] = useState(true)
 
 	const handleApply = () => {
 		return setApply(!applyDialog)
+	}
+
+	const handleOnboarding = () => {
+		return setOnboarding(!openOnboarding)
 	}
 
 	const handleLogout = () => {
@@ -66,11 +71,8 @@ const ApplyToJobs = ({ ...props }) => {
 				</Grid>
 			</Grid>
 			<Dialog
-				classes={{ paper: classes.dialogPaper }}
 				open={applyDialog}
 				onClose={handleApply}
-				aria-labelledby="alert-dialog-title"
-				aria-describedby="alert-dialog-description"
 			>
 				something here
 			</Dialog>

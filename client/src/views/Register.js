@@ -50,7 +50,7 @@ const Register = ({ ...props }) => {
 		.then(result => {
 			if (result.result === "success") {
                 localStorage.setItem("cool-jwt", result.token)
-				props.history.push('/dashboard')
+				props.history.push('/onboarding')
 			}
 		})
 		.catch(err => console.log(err)) // do something with this error

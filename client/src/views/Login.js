@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { InputAdornment, IconButton, FormHelperText, CssBaseline, Grid, Paper, Avatar, Typography, TextField, FormControlLabel, Checkbox, Button, CircularProgress } from '@material-ui/core'
+import { NavLink } from 'react-router-dom'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -185,9 +186,11 @@ const Login = ({ ...props }) => {
 						         	</Button>
 						       	</Grid>
 						       	<Grid item>
-						         	<Button href="/register">
-						           		{"Don't have an account? Sign Up"}
-						         	</Button>
+						       		<NavLink to="/register">
+							         	<Button>
+							           		{"Don't have an account? Sign Up"}
+							         	</Button>
+							        </NavLink>
 						       	</Grid>
 						    </Grid>
 					   	</form>
