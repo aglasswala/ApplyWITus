@@ -156,8 +156,8 @@ const Login = ({ ...props }) => {
 					       		      <InputAdornment position='end'>
 					       		        <IconButton
 					       		          onClick={handleShowPassword}>
-					       		          {!showPassword && <Visibility />}
-					       		          {showPassword && <VisibilityOff />}
+					       		          {showPassword && <Visibility />}
+					       		          {!showPassword && <VisibilityOff />}
 					       		        </IconButton>
 					       		      </InputAdornment>
 					       		    ),
