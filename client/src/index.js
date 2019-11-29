@@ -4,7 +4,7 @@ import App from './App';
 
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
 	palette: {

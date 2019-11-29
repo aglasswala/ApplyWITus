@@ -26,7 +26,7 @@ const ApplyToJobsTable = ({ ...props }) => {
 		         <TableBody>
 		           {tableData.map((prop, key) => {
 		             return (
-		               <TableRow key={key} onClick={() => this.handleClickOpen(prop)}>
+		               <TableRow key={key}>
 		                 {prop.map((prop, key) => {
 		                   return (
 		                     <TableCell className={classes.tableCell} key={key}>

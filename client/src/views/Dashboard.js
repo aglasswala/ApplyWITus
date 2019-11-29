@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import { withStyles } from "@material-ui/core"
 import { Route, Switch } from 'react-router-dom'
@@ -10,28 +10,25 @@ import Jobs from '../components/Jobs'
 import UpdateProfile from '../components/UpdateProfile'
 import Contact from '../components/Contact'
 
-class Dashboard extends Component {
-
-	render() {
-		const { classes, email } = this.props
-		return (
-			<div className={classes.wrapper}>
-				<Sidebar />
-				<div className={classes.mainPanel}>
-					<div className={classes.content}>
-						<div className={classes.container}>
-							<Switch>
-								<Route exact path="/dashboard" component={() => <ApplyToJobs email={email} />} />
-								<Route exact path="/dashboard/jobs" component={Jobs} />
-								<Route exact path="/dashboard/userprofile" component={UpdateProfile} />
-								<Route exact path="/dashboard/contact" component={Contact} />
-							</Switch>
-						</div>	
-					</div>
+const Dashboard = ({ ...props }) => {
+	const { classes } = props
+	return (
+		<div className={classes.wrapper}>
+			<Sidebar />
+			<div className={classes.mainPanel}>
+				<div className={classes.content}>
+					<div className={classes.container}>
+						<Switch>
+							<Route exact path="/dashboard" component={ApplyToJobs} />
+							<Route exact path="/dashboard/jobs" component={Jobs} />
+							<Route exact path="/dashboard/userprofile" component={UpdateProfile} />
+							<Route exact path="/dashboard/contact" component={Contact} />
+						</Switch>
+					</div>	
 				</div>
 			</div>
-		)
-	}
+		</div>
+	)
 }
 
 export default withStyles(dashboardStyles)(Dashboard)

@@ -29,17 +29,15 @@ module.exports = {
 
 		  	return reject("Incorrect email or password")
 		  })
-		  .catch(err => {
-		  	console.log(err)
-		  })
+		  .catch(err => reject(new Error(err)))
 	}),
-	register: (email, password) => new Promise((resolve, reject) => {
+	register: (email, password, firstName, lastName) => new Promise((resolve, reject) => {
 		db.transaction((trx) => {
 	      trx.insert({ hash: password, email: email })
 	        .into('login')
 	        .then(() => trx('users')
 	          .returning('*')
-	          .insert({ email: email }))
+	          .insert({ email: email, fname: firstName, lname: lastName }))
 	        .then(data => resolve(data[0]))
 	        .then(trx.commit)
 	        .catch(trx.rollback);
