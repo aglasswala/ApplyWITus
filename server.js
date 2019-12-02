@@ -7,7 +7,7 @@ const router = require("./routes")
 
 function startServer(server) {
 	server.listen(3001, () => {
-		console.log(`let's get it motherfucker, we live on ${3001}`);
+		console.log(`We're live on ${3001}`);
 	});
 }
 
