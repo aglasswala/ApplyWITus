@@ -42,6 +42,6 @@ module.exports = {
 	        .then(trx.commit)
 	        .catch(trx.rollback);
 	    })
-	      .catch(err => reject(err));
+	      .catch(err => reject(new Error(err)));
 	})
 }

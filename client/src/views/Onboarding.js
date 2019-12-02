@@ -3,6 +3,7 @@ import React from 'react'
 import { CssBaseline, Grid, Paper, LinearProgress } from '@material-ui/core'
 import { Route, Switch } from 'react-router-dom'
 
+import onboardingStyles from '../styles/onboardingStyles'
 import OnboardingOne from '../components/Onboarding/OnboardingOne'
 import OnboardingTwo from '../components/Onboarding/OnboardingTwo'
 import OnboardingThree from '../components/Onboarding/OnboardingThree'
@@ -22,6 +23,8 @@ const Onboarding = ({ ...props }) => {
 		}
 	}
 
+	const classes = onboardingStyles()
+
 	return (
 		<div>
 			<LinearProgress variant="determinate" value={progress()} />
@@ -34,7 +37,7 @@ const Onboarding = ({ ...props }) => {
 				style={{height: "95vh"}}
 			>
 				<Grid item>
-					<Paper>
+					<Paper className={classes.paper}>
 						<Switch>
 							<Route exact path="/onboarding" component={OnboardingOne} />
 							<Route exact path="/onboarding/two" component={OnboardingTwo} />

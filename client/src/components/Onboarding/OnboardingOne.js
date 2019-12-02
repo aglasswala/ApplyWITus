@@ -11,7 +11,7 @@ const OnboardingOne = ({ ...props }) => {
 		<div>
 			<div className={classes.wrapper}>
 				<Typography variant="h5">
-					We just need some more information
+					Let's get some information
 				</Typography>
 			</div>
 			<Grid
