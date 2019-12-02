@@ -30,6 +30,7 @@ module.exports = {
 
 		  	return reject("Incorrect email or password")
 		  })
+
 		  .catch(err => reject(new Error(err)))
 	}),
 	register: (email, password, firstName, lastName) => new Promise((resolve, reject) => {
@@ -46,6 +47,7 @@ module.exports = {
 	        .then(trx.commit)
 	        .catch(trx.rollback);
 	    })
+	    
 	      .catch(err => reject(new Error(err)));
 	})
 }

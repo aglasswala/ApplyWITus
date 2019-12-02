@@ -13,7 +13,6 @@ module.exports = {
 	          result.sendKeys(firstName)
 	      })
 	      .catch(err =>{
-	          console.log(err)
 	          return reject(err)
 	      })
 	      await driver.findElement(By.id("resumator-lastname-value"))
@@ -21,7 +20,6 @@ module.exports = {
 	          result.sendKeys(lastName)
 	      })
 	      .catch(err =>{
-	          console.log(err)
 	          return reject(err)
 	      })
 	      await driver.findElement(By.id("resumator-email-value"))
@@ -29,7 +27,6 @@ module.exports = {
 	          result.sendKeys(email)
 	      })
 	      .catch(err =>{
-	          console.log(err)
 	          return reject(err)
 	      })
 	      await driver.findElement(By.id("resumator-phone-value"))
@@ -37,7 +34,6 @@ module.exports = {
 	          result.sendKeys(phoneNumber)
 	      })
 	      .catch(err =>{
-	          console.log(err)
 	          return reject(err)
 	      })
 	      await driver.findElement(By.id("resumator-choose-upload"))
@@ -45,7 +41,6 @@ module.exports = {
 	          result.click()
 	      })
 	      .catch(err =>{
-	          console.log(err)
 	          return reject(err)
 	      })
 	      await driver.findElement(By.id("resumator-resume-value"))
@@ -54,7 +49,6 @@ module.exports = {
 	          return resolve("YES MF")
 	      })
 	      .catch(err =>{
-	          console.log(err)
 	          return reject(err)
 	      })
 	})
