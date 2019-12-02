@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-import { CssBaseline, Button, TextField, Link, Grid, Typography } from '@material-ui/core';
+import { FormControlLabel, Checkbox, InputAdornment, IconButton, CssBaseline, Button, TextField, Link, Grid, Typography, FormControl } from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons'
 
 import registerStyles from "../styles/registerStyles"
 
@@ -9,7 +10,12 @@ const Register = ({ ...props }) => {
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [showPassword, setShowPassword] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState("")
+
+    useEffect(() => {
+        document.title = 'Register - ApplyWITus';
+      });
 
     const handleFirstName = (e) => {
 		return setFirstName(e.target.value)
@@ -26,6 +32,10 @@ const Register = ({ ...props }) => {
     const handlePassword = (e) => {
 		return setPassword(e.target.value)
     }
+
+    const handleShowPassword = () => {
+		return setShowPassword(!showPassword)
+	}
     
     const handleConfirmPassword = (e) => {
         return setConfirmPassword(e.target.value)
@@ -66,7 +76,7 @@ const Register = ({ ...props }) => {
     return (
         <div>
             <CssBaseline />
-            <Grid 
+            <Grid
                 container
                 direction="column"
                 justify="center"
@@ -126,10 +136,10 @@ const Register = ({ ...props }) => {
                                         fullWidth
                                         name="password"
                                         label="Password"
-                                        type="password"
                                         id="password"
                                         autoComplete="current-password"
                                         onChange={handlePassword}
+                                        type={showPassword ? "text" : "password"}
                                   />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -139,12 +149,19 @@ const Register = ({ ...props }) => {
                                         fullWidth
                                         name="confirmPassword"
                                         label="Confirm Password"
-                                        type="password"
+                                        type={showPassword ? "text" : "password"}
                                         id="confirmPassword"
                                         autoComplete="confirmPassword"
                                         onChange={handleConfirmPassword}
                                     />
                                 </Grid>
+                            </Grid>
+                            <Grid container justify="flex-start">
+                                <FormControlLabel
+                                    control={<Checkbox color="primary" onClick={handleShowPassword} />}
+                                    label="Show Passwords"
+                                >
+                            </FormControlLabel>
                             </Grid>
                             <Button
                                 type="submit"

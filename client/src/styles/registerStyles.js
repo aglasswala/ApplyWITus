@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const registerStyles = makeStyles((theme) => ({
 	'@global': {
 		body: {
-			background: 'lightblue'
+			backgroundImage: "url('https://cdn.hipwallpaper.com/i/97/16/qvziyP.jpg')",
+			height: '100%'
 		},
 	},
 	paper: {
