@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
-import { FormControlLabel, Checkbox, InputAdornment, IconButton, CssBaseline, Button, TextField, Link, Grid, Typography, FormControl } from '@material-ui/core';
-import { Visibility, VisibilityOff } from '@material-ui/icons'
+import { FormControl, FormControlLabel, Checkbox, CssBaseline, Button, TextField, Link, Grid, Typography } from '@material-ui/core';
 
 import registerStyles from "../styles/registerStyles"
+import Validator from 'validator'
 
 const Register = ({ ...props }) => {
     const [firstName, setFirstName] = useState("")
@@ -12,10 +12,6 @@ const Register = ({ ...props }) => {
     const [password, setPassword] = useState("")
     const [showPassword, setShowPassword] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState("")
-
-    useEffect(() => {
-        document.title = 'Register - ApplyWITus';
-      });
 
     const handleFirstName = (e) => {
 		return setFirstName(e.target.value)
@@ -40,6 +36,14 @@ const Register = ({ ...props }) => {
     const handleConfirmPassword = (e) => {
         return setConfirmPassword(e.target.value)
     }
+
+    const validate = (firstName, lastName, email, password, confirmPassword) => {
+        const errors = {}
+        if(!firstName || !lastName || !password || !confirmPassword) errors.password = "Can't be blank";
+        if(!Validator.isEmail(email)) errors.email = "Invalid Email";
+        if(!Validator.equals(password, confirmPassword)) errors.unMatch = "Passwords don't match"
+	    return errors
+	}
 
     const handleClick = (e) => {
 		e.preventDefault()
@@ -69,6 +73,7 @@ const Register = ({ ...props }) => {
     useEffect(() => {
         if (localStorage.getItem("cool-jwt")) {
             props.history.push("/dashboard")
+            document.title = 'Register - ApplyWITus';
         }
     })
 
@@ -92,6 +97,9 @@ const Register = ({ ...props }) => {
                         </div>
                         <form className={classes.form} noValidate>
                             <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
+                                    <FormControl></FormControl>
+                                </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         autoComplete="firstName"
